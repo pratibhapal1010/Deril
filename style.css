@@ -1,0 +1,193 @@
+/* --- GLOBAL RESET --- */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden; /* Prevents side-scrolling from 'No' button */
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+}
+
+/* --- SECTION 1: HERO --- */
+.hero {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    
+    /* SCROLLABLE PARALLAX BACKGROUND */
+    background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('assets/headbackground.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* This creates the scroll effect */
+}
+
+.hero-content {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    padding: 40px;
+    border-radius: 30px;
+    box-shadow: 0 10px 30px rgba(255, 77, 136, 0.2);
+}
+
+.hero h1 {
+    font-size: 52px;
+    color: #ff4d88;
+    margin: 0 0 15px 0;
+}
+
+.hero p {
+    font-size: 20px;
+    color: #444;
+}
+
+/* --- SECTION 2: VIDEO --- */
+.video-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    background-image: url('assets/video.jpg'); 
+    padding: 50px 20px;
+    box-sizing: border-box;
+}
+
+.video-wrapper {
+    display: inline-flex;
+    flex-direction: column; /* Stacks title on top of video */
+    align-items: center;    /* Centers everything horizontally */
+    background: #f68989;    /* Your pink border color */
+    padding: 20px;          /* Border thickness */
+    border-radius: 40px;
+    box-shadow: 0 15px 35px rgba(255, 77, 136, 0.3);
+}
+
+.video-title {
+    font-size: 32px;
+    color: white;           /* White text looks great on the #f68989 background */
+    margin-bottom: 15px;    /* Space between text and video */
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+video {
+    width: 630px;
+    height: 700px;
+    display: block;
+    object-fit: cover;
+    border-radius: 25px; /* Rounding the video corners inside the border */
+    pointer-events: none;
+}
+
+/* Mobile Fix */
+@media (max-width: 700px) {
+    video {
+        width: 100%;
+        height: auto;
+        max-width: 90vw;
+    }
+    .video-title {
+        font-size: 24px;
+    }
+}
+
+/* --- SECTION 3: QUESTION (NO SPACE BELOW) --- */
+.question-section {
+    width: 100%;
+    height: 100vh; /* Exactly one screen high */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0;
+    
+    /* SCROLLABLE PARALLAX BACKGROUND */
+    background-image:  url('assets/question.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.question-box {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(15px);
+    padding: 60px 40px;
+    border-radius: 50px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    text-align: center;
+}
+
+.question-box h1 {
+    font-size: 42px;
+    color: white;
+    margin-bottom: 40px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+button {
+    padding: 15px 40px;
+    font-size: 22px;
+    font-weight: 600;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#yes { background-color: #ff4d88; color: white; }
+#no { background-color: #eeeeee; color: #555; }
+
+/* --- POPUP --- */
+.popup {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: 9999;
+}
+
+.popup-content {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 320px;
+}
+
+#closePopup {
+    margin-top: 15px;
+    background: pink;
+    padding: 10px 20px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .hero h1, .question-box h1 { font-size: 32px; }
+    video { width: 90vw; height: auto; aspect-ratio: 630/700; }
+    .hero, .question-section { background-attachment: scroll; } /* Parallax is jittery on mobile */
+}
+/* The initial hidden state for all lazy text */
+.lazy-text {
+    opacity: 0;
+    transform: translateY(30px); /* Slides up from 30px below */
+    transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+    will-change: opacity, transform;
+}
+
+/* The state when the text becomes visible */
+.lazy-text.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
